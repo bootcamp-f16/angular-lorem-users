@@ -72,10 +72,6 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(8);
-	
-	var _app4 = _interopRequireDefault(_app3);
-	
 	var _userDetails = __webpack_require__(10);
 	
 	var _userDetails2 = _interopRequireDefault(_userDetails);
@@ -85,7 +81,7 @@
 	var AppModule = _angular2.default.module('app', ['ngResource']);
 	
 	AppModule.factory('randomuserService', _randomuser2.default);
-	AppModule.component('app', _app4.default).component('userDetails', _userDetails2.default);
+	AppModule.component('app', _app2.default).component('userDetails', _userDetails2.default);
 	
 	exports.default = AppModule;
 
@@ -32782,12 +32778,6 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
-
-	module.exports = "<header>\n    <nav class=\"navbar navbar-default\">\n        <div class=\"container\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-users\" aria-hidden=\"true\"></i>\n                    Lorem Users\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-8\">\n            <h2>\n                Random Users\n                <span ng-show=\"appCtrl.seed\">\n                    for {{appCtrl.seed}}\n                </span>\n                <small>({{appCtrl.users.length}})</small>\n            </h2>\n            <ul class=\"list-group\">\n                <li class=\"list-group-item\" ng-repeat=\"user in appCtrl.users\" >\n                    <a href=\"\" class=\"user-name\" ng-click=\"appCtrl.setUserDetail($index)\">\n                        {{user.name.first}} {{user.name.last}}\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"col-md-4\">\n            <div class=\"panel panel-default\">\n                <div class=\"panel-body\">\n                    <h4>\n                        Change Seed\n                    </h4>\n                    <em>\n                        Current seed: {{appCtrl.seed || 'None'}}\n                    </em>\n                    <form ng-submit=\"appCtrl.update()\">\n                        <div class=\"form-group\">\n                            <input type=\"text\" ng-model=\"appCtrl.newSeed\" class=\"form-control\">\n                        </div>\n                        <button class=\"btn btn-primary btn-sm\">\n                            Update\n                        </button>\n                    </form>\n                </div>\n            </div>\n            <user-details user=\"appCtrl.currentUser\" />\n        </div>\n    </div>\n</div>\n"
-
-/***/ },
-/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32796,7 +32786,7 @@
 	    value: true
 	});
 	
-	var _app = __webpack_require__(7);
+	var _app = __webpack_require__(8);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -32813,6 +32803,12 @@
 	};
 	
 	exports.default = appComponent;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = "<header>\n    <nav class=\"navbar navbar-default\">\n        <div class=\"container\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-users\" aria-hidden=\"true\"></i>\n                    Lorem Users\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-8\">\n            <h2>\n                Random Users\n                <span ng-show=\"appCtrl.seed\">\n                    for {{appCtrl.seed}}\n                </span>\n                <small>({{appCtrl.users.length}})</small>\n            </h2>\n            <ul class=\"list-group\">\n                <li class=\"list-group-item\" ng-repeat=\"user in appCtrl.users\" >\n                    <a href=\"\" class=\"user-name\" ng-click=\"appCtrl.setUserDetail($index)\">\n                        {{user.name.first}} {{user.name.last}}\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"col-md-4\">\n            <div class=\"panel panel-default\">\n                <div class=\"panel-body\">\n                    <h4>\n                        Change Seed\n                    </h4>\n                    <em>\n                        Current seed: {{appCtrl.seed || 'None'}}\n                    </em>\n                    <form ng-submit=\"appCtrl.update()\">\n                        <div class=\"form-group\">\n                            <input type=\"text\" ng-model=\"appCtrl.newSeed\" class=\"form-control\">\n                        </div>\n                        <button class=\"btn btn-primary btn-sm\">\n                            Update\n                        </button>\n                    </form>\n                </div>\n            </div>\n            <user-details user=\"appCtrl.currentUser\" />\n        </div>\n    </div>\n</div>\n"
 
 /***/ },
 /* 9 */
@@ -32838,12 +32834,12 @@
 	
 	    updateUsers();
 	
-	    ctrl.update = function () {
+	    ctrl.update = function update() {
 	        ctrl.seed = ctrl.newSeed;
 	        updateUsers();
 	    };
 	
-	    ctrl.setUserDetail = function (index) {
+	    ctrl.setUserDetail = function setUserDetail(index) {
 	        ctrl.currentUser = ctrl.users[index];
 	    };
 	}
