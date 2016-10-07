@@ -1,10 +1,10 @@
 import template from './user-details.html';
 
 const userDetailsComponent = {
-    template: template,
+    template,
     bindings: {
-        user: '<'
-    }
+        user: '<',
+    },
 };
 
 export default userDetailsComponent;
