@@ -67,7 +67,12 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function randomuserService($resource) {
-	    var api = $resource('https://randomuser.me/api/');
+	    var api = $resource('https://randomuser.me/api/', {}, {
+	        getUsers: {
+	            method: 'GET',
+	            params: { results: 25 }
+	        }
+	    });
 	
 	    return api;
 	}
@@ -79,7 +84,7 @@
 	    ctrl.currentUser = null;
 	
 	    function updateUsers() {
-	        randomuserService.get({ results: 25, seed: ctrl.seed }).$promise.then(function (data) {
+	        randomuserService.getUsers({ seed: ctrl.seed }).$promise.then(function (data) {
 	            ctrl.users = data.results;
 	            ctrl.currentUser = null;
 	        });

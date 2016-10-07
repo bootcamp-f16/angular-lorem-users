@@ -2,7 +2,12 @@ import angular from 'angular';
 import 'angular-resource';
 
 function randomuserService ($resource) {
-    const api = $resource('https://randomuser.me/api/');
+    const api = $resource('https://randomuser.me/api/', {}, {
+        getUsers: {
+            method: 'GET',
+            params: { results:25 }
+        }
+    });
 
     return api;
 }
@@ -14,7 +19,7 @@ function AppController(randomuserService) {
     ctrl.currentUser = null;
 
     function updateUsers () {
-        randomuserService.get({results: 25, seed: ctrl.seed}).$promise
+        randomuserService.getUsers({seed: ctrl.seed}).$promise
             .then(function (data) {
                 ctrl.users = data.results;
                 ctrl.currentUser = null;
