@@ -72,41 +72,20 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
+	var _app3 = __webpack_require__(8);
+	
+	var _app4 = _interopRequireDefault(_app3);
+	
+	var _userDetails = __webpack_require__(10);
+	
+	var _userDetails2 = _interopRequireDefault(_userDetails);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function AppController(randomuserService) {
-	    var ctrl = this;
-	    ctrl.seed = null;
-	    ctrl.users = [];
-	    ctrl.currentUser = null;
-	
-	    function updateUsers() {
-	        randomuserService.getUsers({ seed: ctrl.seed }).$promise.then(function (users) {
-	            ctrl.users = users;
-	            ctrl.currentUser = null;
-	        });
-	    }
-	
-	    updateUsers();
-	
-	    ctrl.update = function () {
-	        ctrl.seed = ctrl.newSeed;
-	        updateUsers();
-	    };
-	
-	    ctrl.setUserDetail = function (index) {
-	        ctrl.currentUser = ctrl.users[index];
-	    };
-	}
 	
 	var AppModule = _angular2.default.module('app', ['ngResource']);
 	
 	AppModule.factory('randomuserService', _randomuser2.default);
-	AppModule.component('app', {
-	    template: _app2.default,
-	    controller: AppController,
-	    controllerAs: 'appCtrl'
-	});
+	AppModule.component('app', _app4.default).component('userDetails', _userDetails2.default);
 	
 	exports.default = AppModule;
 
@@ -32805,7 +32784,102 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-default\">\n        <div class=\"container\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-users\" aria-hidden=\"true\"></i>\n                    Lorem Users\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-8\">\n            <h2>\n                Random Users\n                <span ng-show=\"appCtrl.seed\">\n                    for {{appCtrl.seed}}\n                </span>\n                <small>({{appCtrl.users.length}})</small>\n            </h2>\n            <ul class=\"list-group\">\n                <li class=\"list-group-item\" ng-repeat=\"user in appCtrl.users\" >\n                    <a href=\"\" class=\"user-name\" ng-click=\"appCtrl.setUserDetail($index)\">\n                        {{user.name.first}} {{user.name.last}}\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"col-md-4\">\n            <div class=\"panel panel-default\">\n                <div class=\"panel-body\">\n                    <h4>\n                        Change Seed\n                    </h4>\n                    <em>\n                        Current seed: {{appCtrl.seed || 'None'}}\n                    </em>\n                    <form ng-submit=\"appCtrl.update()\">\n                        <div class=\"form-group\">\n                            <input type=\"text\" ng-model=\"appCtrl.newSeed\" class=\"form-control\">\n                        </div>\n                        <button class=\"btn btn-primary btn-sm\">\n                            Update\n                        </button>\n                    </form>\n                </div>\n            </div>\n            <div class=\"thumbnail user-details\" ng-show=\"appCtrl.currentUser\">\n                <img class=\"img-responsive img-circle\" ng-src=\"{{appCtrl.currentUser.picture.large}}\">\n                <div class=\"caption\">\n                    <h3>{{appCtrl.currentUser.name.first}} {{appCtrl.currentUser.name.last}}</h3>\n                    <table class=\"table table-striped table-condensed\">\n                        <tbody>\n                            <tr>\n                                <th>Location</th>\n                                <td>\n                                    {{appCtrl.currentUser.location.street}}\n                                    <br>\n                                    {{appCtrl.currentUser.location.city}},\n                                    {{appCtrl.currentUser.location.state}}\n                                    {{appCtrl.currentUser.location.postcode}}\n                                </td>\n                            </tr>\n                            <tr>\n                                <th>Email</th>\n                                <td>\n                                    {{appCtrl.currentUser.email}}\n                                </td>\n                            </tr>\n                            <tr>\n                                <th>Phone</th>\n                                <td>\n                                    {{appCtrl.currentUser.phone}}\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-default\">\n        <div class=\"container\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-users\" aria-hidden=\"true\"></i>\n                    Lorem Users\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-8\">\n            <h2>\n                Random Users\n                <span ng-show=\"appCtrl.seed\">\n                    for {{appCtrl.seed}}\n                </span>\n                <small>({{appCtrl.users.length}})</small>\n            </h2>\n            <ul class=\"list-group\">\n                <li class=\"list-group-item\" ng-repeat=\"user in appCtrl.users\" >\n                    <a href=\"\" class=\"user-name\" ng-click=\"appCtrl.setUserDetail($index)\">\n                        {{user.name.first}} {{user.name.last}}\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"col-md-4\">\n            <div class=\"panel panel-default\">\n                <div class=\"panel-body\">\n                    <h4>\n                        Change Seed\n                    </h4>\n                    <em>\n                        Current seed: {{appCtrl.seed || 'None'}}\n                    </em>\n                    <form ng-submit=\"appCtrl.update()\">\n                        <div class=\"form-group\">\n                            <input type=\"text\" ng-model=\"appCtrl.newSeed\" class=\"form-control\">\n                        </div>\n                        <button class=\"btn btn-primary btn-sm\">\n                            Update\n                        </button>\n                    </form>\n                </div>\n            </div>\n            <user-details user=\"appCtrl.currentUser\" />\n        </div>\n    </div>\n</div>\n"
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _app = __webpack_require__(7);
+	
+	var _app2 = _interopRequireDefault(_app);
+	
+	var _app3 = __webpack_require__(9);
+	
+	var _app4 = _interopRequireDefault(_app3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appComponent = {
+	    template: _app2.default,
+	    controller: _app4.default,
+	    controllerAs: 'appCtrl'
+	};
+	
+	exports.default = appComponent;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	function AppController(randomuserService) {
+	    var ctrl = this;
+	    ctrl.seed = null;
+	    ctrl.users = [];
+	    ctrl.currentUser = null;
+	
+	    function updateUsers() {
+	        randomuserService.getUsers({ seed: ctrl.seed }).$promise.then(function (users) {
+	            ctrl.users = users;
+	            ctrl.currentUser = null;
+	        });
+	    }
+	
+	    updateUsers();
+	
+	    ctrl.update = function () {
+	        ctrl.seed = ctrl.newSeed;
+	        updateUsers();
+	    };
+	
+	    ctrl.setUserDetail = function (index) {
+	        ctrl.currentUser = ctrl.users[index];
+	    };
+	}
+	
+	exports.default = AppController;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _userDetails = __webpack_require__(11);
+	
+	var _userDetails2 = _interopRequireDefault(_userDetails);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var userDetailsComponent = {
+	    template: _userDetails2.default,
+	    bindings: {
+	        user: '<'
+	    }
+	};
+	
+	exports.default = userDetailsComponent;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"thumbnail user-details\" ng-show=\"$ctrl.user\">\n    <img class=\"img-responsive img-circle\" ng-src=\"{{$ctrl.user.picture.large}}\">\n    <div class=\"caption\">\n        <h3>{{$ctrl.user.name.first}} {{$ctrl.user.name.last}}</h3>\n        <table class=\"table table-striped table-condensed\">\n            <tbody>\n                <tr>\n                    <th>Location</th>\n                    <td>\n                        {{$ctrl.user.location.street}}\n                        <br>\n                        {{$ctrl.user.location.city}},\n                        {{$ctrl.user.location.state}}\n                        {{$ctrl.user.location.postcode}}\n                    </td>\n                </tr>\n                <tr>\n                    <th>Email</th>\n                    <td>\n                        {{$ctrl.user.email}}\n                    </td>\n                </tr>\n                <tr>\n                    <th>Phone</th>\n                    <td>\n                        {{$ctrl.user.phone}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>"
 
 /***/ }
 /******/ ]);
