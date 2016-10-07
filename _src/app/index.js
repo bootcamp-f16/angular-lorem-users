@@ -2,6 +2,8 @@ import angular from 'angular';
 import 'angular-resource';
 
 import randomuserService from './randomuser.service';
+import appTemplate from './app.html';
+
 
 function AppController(randomuserService) {
     const ctrl = this;
@@ -34,6 +36,10 @@ const AppModule = angular.module('app', [
 ]);
 
 AppModule.factory('randomuserService', randomuserService);
-AppModule.controller('AppController', AppController);
+AppModule.component('app', {
+    template: appTemplate,
+    controller: AppController,
+    controllerAs: 'appCtrl'
+});
 
 export default AppModule;
