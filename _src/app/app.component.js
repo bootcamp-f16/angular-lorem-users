@@ -4,7 +4,7 @@ import AppController from './app.controller';
 const appComponent = {
     template: appTemplate,
     controller: AppController,
-    controllerAs: 'appCtrl'
-}
+    controllerAs: 'appCtrl',
+};
 
 export default appComponent;

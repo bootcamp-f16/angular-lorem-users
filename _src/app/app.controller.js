@@ -4,9 +4,9 @@ function AppController(randomuserService) {
     ctrl.users = [];
     ctrl.currentUser = null;
 
-    function updateUsers () {
-        randomuserService.getUsers({seed: ctrl.seed}).$promise
-            .then(function (users) {
+    function updateUsers() {
+        randomuserService.getUsers({ seed: ctrl.seed }).$promise
+            .then((users) => {
                 ctrl.users = users;
                 ctrl.currentUser = null;
             });
@@ -14,14 +14,14 @@ function AppController(randomuserService) {
 
     updateUsers();
 
-    ctrl.update = function () {
+    ctrl.update = function update() {
         ctrl.seed = ctrl.newSeed;
         updateUsers();
-    }
+    };
 
-    ctrl.setUserDetail = function (index) {
+    ctrl.setUserDetail = function setUserDetail(index) {
         ctrl.currentUser = ctrl.users[index];
-    }
+    };
 }
 
 export default AppController;
