@@ -70,7 +70,11 @@
 	    var api = $resource('https://randomuser.me/api/', {}, {
 	        getUsers: {
 	            method: 'GET',
-	            params: { results: 25 }
+	            isArray: true,
+	            params: { results: 25 },
+	            transformResponse: function transformResponse(data) {
+	                return _angular2.default.fromJson(data).results;
+	            }
 	        }
 	    });
 	
@@ -84,8 +88,8 @@
 	    ctrl.currentUser = null;
 	
 	    function updateUsers() {
-	        randomuserService.getUsers({ seed: ctrl.seed }).$promise.then(function (data) {
-	            ctrl.users = data.results;
+	        randomuserService.getUsers({ seed: ctrl.seed }).$promise.then(function (users) {
+	            ctrl.users = users;
 	            ctrl.currentUser = null;
 	        });
 	    }

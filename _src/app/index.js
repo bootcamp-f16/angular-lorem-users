@@ -5,7 +5,11 @@ function randomuserService ($resource) {
     const api = $resource('https://randomuser.me/api/', {}, {
         getUsers: {
             method: 'GET',
-            params: { results:25 }
+            isArray: true,
+            params: { results:25 },
+            transformResponse(data) {
+                return angular.fromJson(data).results;
+            }
         }
     });
 
@@ -20,8 +24,8 @@ function AppController(randomuserService) {
 
     function updateUsers () {
         randomuserService.getUsers({seed: ctrl.seed}).$promise
-            .then(function (data) {
-                ctrl.users = data.results;
+            .then(function (users) {
+                ctrl.users = users;
                 ctrl.currentUser = null;
             });
     }
