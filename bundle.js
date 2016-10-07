@@ -64,22 +64,11 @@
 	
 	__webpack_require__(4);
 	
+	var _randomuser = __webpack_require__(6);
+	
+	var _randomuser2 = _interopRequireDefault(_randomuser);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function randomuserService($resource) {
-	    var api = $resource('https://randomuser.me/api/', {}, {
-	        getUsers: {
-	            method: 'GET',
-	            isArray: true,
-	            params: { results: 25 },
-	            transformResponse: function transformResponse(data) {
-	                return _angular2.default.fromJson(data).results;
-	            }
-	        }
-	    });
-	
-	    return api;
-	}
 	
 	function AppController(randomuserService) {
 	    var ctrl = this;
@@ -108,7 +97,7 @@
 	
 	var AppModule = _angular2.default.module('app', ['ngResource']);
 	
-	AppModule.factory('randomuserService', randomuserService);
+	AppModule.factory('randomuserService', _randomuser2.default);
 	AppModule.controller('AppController', AppController);
 	
 	exports.default = AppModule;
@@ -32770,6 +32759,39 @@
 	
 	})(window, window.angular);
 
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _angular = __webpack_require__(2);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function randomuserService($resource) {
+	    var api = $resource('https://randomuser.me/api/', {}, {
+	        getUsers: {
+	            method: 'GET',
+	            isArray: true,
+	            params: { results: 25 },
+	            transformResponse: function transformResponse(data) {
+	                return _angular2.default.fromJson(data).results;
+	            }
+	        }
+	    });
+	
+	    return api;
+	}
+	
+	exports.default = randomuserService;
 
 /***/ }
 /******/ ]);

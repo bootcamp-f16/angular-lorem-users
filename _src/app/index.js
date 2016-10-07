@@ -1,20 +1,7 @@
 import angular from 'angular';
 import 'angular-resource';
 
-function randomuserService ($resource) {
-    const api = $resource('https://randomuser.me/api/', {}, {
-        getUsers: {
-            method: 'GET',
-            isArray: true,
-            params: { results:25 },
-            transformResponse(data) {
-                return angular.fromJson(data).results;
-            }
-        }
-    });
-
-    return api;
-}
+import randomuserService from './randomuser.service';
 
 function AppController(randomuserService) {
     const ctrl = this;
