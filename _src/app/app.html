@@ -1,0 +1,53 @@
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="navbar-brand">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    Lorem Users
+                </span>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>
+                Random Users
+                <span ng-show="appCtrl.seed">
+                    for {{appCtrl.seed}}
+                </span>
+                <small>({{appCtrl.users.length}})</small>
+            </h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="user in appCtrl.users" >
+                    <a href="" class="user-name" ng-click="appCtrl.setUserDetail($index)">
+                        {{user.name.first}} {{user.name.last}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>
+                        Change Seed
+                    </h4>
+                    <em>
+                        Current seed: {{appCtrl.seed || 'None'}}
+                    </em>
+                    <form ng-submit="appCtrl.update()">
+                        <div class="form-group">
+                            <input type="text" ng-model="appCtrl.newSeed" class="form-control">
+                        </div>
+                        <button class="btn btn-primary btn-sm">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <user-details user="appCtrl.currentUser" />
+        </div>
+    </div>
+</div>

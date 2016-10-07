@@ -1,38 +1,19 @@
 import angular from 'angular';
+import 'angular-resource';
 
-function AppController($http) {
-    const ctrl = this;
-    ctrl.seed = null;
-    ctrl.users = [];
-    ctrl.currentUser = null;
+import randomuserService from './randomuser.service';
+import appTemplate from './app.html';
+import appComponent from './app.component';
 
-    function updateUsers () {
-        $http.get('https://randomuser.me/api/', { 
-            params: {
-                results: 25,
-                seed: ctrl.seed,
-            }
-        }).then(function (response) {
-            ctrl.users = response.data.results;
-            ctrl.currentUser = null;
-        });
-    }
-
-    updateUsers();
-
-    ctrl.update = function () {
-        ctrl.seed = ctrl.newSeed;
-        updateUsers();
-    }
-
-    ctrl.setUserDetail = function (index) {
-        ctrl.currentUser = ctrl.users[index];
-    }
-}
+import userDetailsComponent from './user-details.component';
 
 const AppModule = angular.module('app', [
+    'ngResource'
 ]);
 
-AppModule.controller('AppController', AppController);
+AppModule.factory('randomuserService', randomuserService);
+AppModule
+    .component('app', appComponent)
+    .component('userDetails', userDetailsComponent);
 
 export default AppModule;
